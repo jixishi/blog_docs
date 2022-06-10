@@ -1,12 +1,3 @@
-```json
-{
-    "date":"2021.08.02 14:33",
-    "tags": ["Nav"],
-    "author": "JiXieShi", 
-    "musicId":"874229"
-}
-```
-
 ## 工具
 
 - [Zfile](https://github.com/zhaojun1998/zfile) --基于Java的在线多容器网盘列表支持在线解析部分文件
