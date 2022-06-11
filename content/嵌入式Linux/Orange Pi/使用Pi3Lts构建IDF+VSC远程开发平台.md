@@ -112,7 +112,15 @@ sudo systemctl enable --now code-server@$USER
    idf.py flash monitor
    ```
 
+## 成品展示
+
+![RUN](./assets/images/Orange%20Pi/VSC_1.png)
+
+![Flash](./assets/images/Orange%20Pi/VSC_2.png)
+
+![Debug](./assets/images/Orange%20Pi/VSC_3.png)
+
 ## 参考文档
 
-- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/linux-macos-setup.html) ————ESP官方安装指南
+- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/linux-macos-setup.html)     ————ESP官方安装指南
 - [Code-server](https://github.com/coder/code-server) ————VSC在线版官方仓库地址
