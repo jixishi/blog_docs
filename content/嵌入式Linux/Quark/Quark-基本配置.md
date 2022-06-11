@@ -24,9 +24,8 @@
 
 ## 联网
 
-1. 切换用户为root
-
 ```shell
+# 切换用户为root
 su root
 # 开启WiFi
 nmcli r wifi on
