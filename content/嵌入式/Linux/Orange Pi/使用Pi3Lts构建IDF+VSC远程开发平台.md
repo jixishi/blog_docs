@@ -1,6 +1,6 @@
 ```json
 {
-    "date":"2022.03.16 17:38",
+    "date":"2022.05.13 20:46",
     "tags": ["Orange Pi","Linux","ESP-IDF","ESP","VSC"],
     "author": "JiXieShi", 
     "musicId":"5381722575"
@@ -122,5 +122,5 @@ sudo systemctl enable --now code-server@$USER
 
 ## 参考文档
 
-- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/linux-macos-setup.html)     ————ESP官方安装指南
+- [ESP-IDF](https://docs.espressif.com/projects/esp-idf/zh_CN/latest/esp32/get-started/linux-macos-setup.html) ————ESP官方安装指南
 - [Code-server](https://github.com/coder/code-server) ————VSC在线版官方仓库地址
