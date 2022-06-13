@@ -106,8 +106,8 @@ void LED_HC595_595_W(uint8_t duan, uint8_t wei);
 ### C文件
 
 ```c
-
 #include "smg.h"
+
 //共阴数字数组
 const uint8_t smg_num[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x39,0x5e,0x79,0x71};
 //位选数组
@@ -135,7 +135,7 @@ uint8_t Get_Num(uint8_t duan)
 #if Y_OR_Y
     uint8_t smg_duan = ~smg_num[duan];
 #else
-    uint8_t smg_duan = ~smg_num[duan];
+    uint8_t smg_duan = smg_num[duan];
 #endif
     return smg_duan;
 }
@@ -237,7 +237,7 @@ void LED_IO_138_W(uint8_t duan, uint8_t wei){
 * @retval None
 */
 void LED_IO_CS_W(uint8_t duan, uint8_t wei){
-    IO_Wei(Get_Num(smg_weis[wei]));
+    IO_Wei(~smg_weis[wei]);
     IO_Write_Data(Get_Num(duan));
 }
 #endif
