@@ -29,7 +29,6 @@
 //#define Y_OR_Y 1 //取消注释启用共阳
 
 
-
 //HC138重定义
 
 #define HC138_A0_H   HAL_GPIO_WritePin(HC138_A0_GPIO_Port,HC138_A0_Pin,GPIO_PIN_SET)
@@ -294,6 +293,16 @@ void LED_HC595_595_W(uint8_t duan, uint8_t wei){
    }
    ```
 
+## 注意事项
 
+在魔女C8T6开发板中因板载dap原因有如下引脚不能作为HC595DATA
+
+- PB4
+- PB3
+- PA15
+- PA14
+- PA13
+
+没错就是JTAG和SWD调试会用的引脚(ps:因为这几个IO与c6t6直连)
 
  
