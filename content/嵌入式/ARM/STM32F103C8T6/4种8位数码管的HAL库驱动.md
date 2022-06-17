@@ -4,6 +4,7 @@
     "tags": ["BLOG","F103C8T6","C8T6","HAL","数码管"],
     "description": "基于HAL库的魔女F1C8T6开发板所写的四种8共阴数码管驱动",
     "author": "JiXieShi",
+    "image": "./assets/images/HAL/%E9%AD%94%E5%A5%B3F103C8T6.jpg",
     "musicId":"5381722575"
 }
 ```
