@@ -194,7 +194,6 @@ void HC595_Wei(uint8_t num)
 void HC595_Write_Data(uint8_t duan)
 {
     uint8_t i;
-    uint8_t smg_duan = Get_Num(duan)
     for( i=0;i<8;i++)
     {
         if(smg_duan&0x80)HC595_DATA_H;
@@ -202,7 +201,7 @@ void HC595_Write_Data(uint8_t duan)
         HC595_SCLK_L;
         Delay_Us(5);
         HC595_SCLK_H;
-        smg_duan<<=1;
+        duan<<=1;
     }
     HC595_Refresh();
 }
@@ -216,7 +215,17 @@ void HC595_Write_Data(uint8_t duan)
 */
 void LED_HC595_138_W(uint8_t duan, uint8_t wei){
     HC138_Wei(wei);
-    HC595_Write_Data(duan);
+    HC595_Write_Data(Get_Num(duan));
+}
+/**
+* @brief HC595+HC138显示带小数点
+* @param duan: 字符显示(0-F)
+* @param wei: 位选(0-7)
+* @retval None
+*/
+void LED_HC595_138_D(uint8_t duan, uint8_t wei){
+    HC138_Wei(wei);
+    HC595_Write_Data(Get_Num(duan)|0x80);
 }
 #endif
 #if IO && HC138
@@ -230,6 +239,16 @@ void LED_IO_138_W(uint8_t duan, uint8_t wei){
     HC138_Wei(wei);
     IO_Write_Data(Get_Num(duan));
 }
+/**
+* @brief IO+HC138显示带小数点
+* @param duan: 字符显示(0-F)
+* @param wei: 位选(0-7)
+* @retval None
+*/
+void LED_IO_138_D(uint8_t duan, uint8_t wei){
+    HC138_Wei(wei);
+    IO_Write_Data(Get_Num(duan)|0x80);
+}
 #endif
 #if IO && IOCS
 /**
@@ -242,6 +261,16 @@ void LED_IO_CS_W(uint8_t duan, uint8_t wei){
     IO_Wei(~smg_weis[wei]);
     IO_Write_Data(Get_Num(duan));
 }
+/**
+* @brief IO+IOCS显示带小数点
+* @param duan: 字符显示(0-F)
+* @param wei: 位选(0-7)
+* @retval None
+*/
+void LED_IO_CS_D(uint8_t duan, uint8_t wei){
+    IO_Wei(~smg_weis[wei]);
+    IO_Write_Data(Get_Num(duan)|0x80);
+}
 #endif
 #if HC595
 /**
@@ -252,7 +281,17 @@ void LED_IO_CS_W(uint8_t duan, uint8_t wei){
 */
 void LED_HC595_595_W(uint8_t duan, uint8_t wei){
     HC595_Wei(wei);
-    HC595_Write_Data(duan);
+    HC595_Write_Data(Get_Num(duan));
+}
+/**
+* @brief 双HC595显示带小数点
+* @param duan: 字符显示(0-F)
+* @param wei: 位选(0-7)
+* @retval None
+*/
+void LED_HC595_595_D(uint8_t duan, uint8_t wei){
+    HC595_Wei(wei);
+    HC595_Write_Data(Get_Num(duan)|0x80);
 }
 #endif
 ```
