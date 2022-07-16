@@ -36,12 +36,12 @@
 
 2. 设置以下环境变量
 
-| 变量名  |           变量值           |                    例如                    |
-| :-----: | :------------------------: | :----------------------------------------: |
-| Gcc_Arm |   Arm工具链安装路径\bin    | D:\GNU Arm Embedded Toolchain\9 2019.9\bin |
-| OpenOCD |      OpenOCD安装路径       |     D:\openocd\xpack-openocd-0.10.0-15     |
-|   GCC   |      GCC安装目录\bin       |             D:\TDM-GCC-64\bin              |
-|  PATH   | ;%Gcc_Arm%;%OpenOCD%;%GCC% |         ;%Gcc_Arm%;%OpenOCD%;%GCC%         |
+| 变量名  | 变量值                     | 例如                                       |
+| :------ | :------------------------- | :----------------------------------------- |
+| Gcc_Arm | Arm工具链安装路径\bin      | D:\GNU Arm Embedded Toolchain\9 2019.9\bin |
+| OpenOCD | OpenOCD安装路径            | D:\openocd\xpack-openocd-0.10.0-15         |
+| GCC     | GCC安装目录\bin            | D:\TDM-GCC-64\bin                          |
+| PATH    | ;%Gcc_Arm%;%OpenOCD%;%GCC% | ;%Gcc_Arm%;%OpenOCD%;%GCC%                 |
 
 3. 重启电脑(可选操作)
 
