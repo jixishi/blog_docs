@@ -6,19 +6,19 @@
     "musicId":"5381722575"
 }
 ```
+
 ## 烧录
 
 1. 镜像获取
-
+   
    [Quark-n-21-1-11](https://files.seeedstudio.com/wiki/Quantum-Mini-Linux-Dev-Kit/quark-n-21-1-11.zip)
 
 2. 下载烧录软件
-
+   
    - [BalenaEtcher](https://www.balena.io/etcher/)
    - [Rufus](http://rufus.ie/zh/)
 
 3. 开始烧录
-
 - ![BalenaEtcher](./assets/images/Quark/BalenaEtcher.png)
 - ![Rufus](./assets/images/Quark/Rufus.png)
 
@@ -34,8 +34,6 @@ nmcli dev wifi
 # 连接WiFi SSID为WiFi名 PASSWORD为WiFi密码
 nmcli dev wifi connect "SSID" password "PASSWORD" ifname wlan0
 ```
-
-
 
 ## 更新系统到 18
 
@@ -67,7 +65,7 @@ sudo do-release-upgrade
 
 ```shell
 sudo apt-get install zsh git wget curl vim -y
-bash -c "$(curl -fsSL https://git.io/zinit-install)"
+bash -c "$(curl -fsSL https://git.io/zinit-install)" # https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh
 ```
 
 2. 配置 zsh
@@ -90,12 +88,19 @@ zinit snippet OMZ::lib/completion.zsh
 # 环境变量
 export LC_ALL=en_US.UTF-8  
 export LANG=en_US.UTF-8
+# 变量配置
+PROXY_IP="192.168.31.14"
+PROXY_PORT="10808"
 # 快捷命令
+alias spi="export https_proxy=http://$PROXY_IP:$PROXY_PORT && export http_proxy=http://$PROXY_IP:$PROXY_PORT"
+alias upi="unset http_proxy && unset https_proxy"
+alias cpi='echo $http_proxy "<->" $https_proxy'
 alias edzsh="vim ~/.zshrc"
+alias upzsh="exec zsh"
 alias edvim="vim ~/.vimrc"
 alias cls="clear"
 alias la="ls -a"
-alias ll="ls -l"
+alias ll="ls -lh"
 EOF
 ```
 
@@ -140,15 +145,13 @@ typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
   )
 ```
 
-6.  显示效果如下
+6. 显示效果如下
 
-![zsh_show](./assets/images/Quark/zsh_show.png)
-
+![loading-ag-221](./assets/images/Quark/zsh_show.png)
 
 ## 配置 vim
 
-
-```
+```shell
 cat >> ~/.vimrc <<EOF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" 
 
