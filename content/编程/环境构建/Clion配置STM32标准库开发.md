@@ -1,6 +1,6 @@
 ```json
 {
-    "date":"2022.10.22 10:38",
+    "date":"2022.10.24 14:53",
     "tags": ["BLOG","Clion","STM32","Openocd","DAP"],
     "author": "JiXieShi",
     "musicId":"5381722575"
@@ -155,3 +155,48 @@
 ![image-20221023104252578](https://i.imgur.com/45fvpND.png)
 
 ![image-20221023104343505](https://i.imgur.com/XEvT87P.png)
+
+### 实用技巧
+
+1. 串口重定向——基于魔女代码
+
+   ```c
+   #ifdef __GNUC__
+   /* With GCC/RAISONANCE, small printf (option LD Linker-Libraries-Small printf
+      set to Yes) calls __io_putchar() */
+   #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+   #else
+   #define PUTCHAR_PROTOTYPE int fputc(int ch, FILE *f)
+   #endif /* __GNUC__ */
+   /**
+     * @brief  将C语言库中的printf函数重新定位到USART上。.
+     * @param  None
+     * @retval None
+     */
+   PUTCHAR_PROTOTYPE
+   {
+   #if 1                                        // 方式1-使用常用的poll方式发送数据，比较容易理解，但等待耗时大
+       while ((USART1->SR & 0X40) == 0);        // 等待上一次串口数据发送完成
+       USART1->DR = (u8) ch;                    // 写DR,串口1将发送数据
+       return ch;
+   #else                                        // 方式2-使用queue+中断方式发送数据; 无需像方式1那样等待耗时，但要借助已写好的函数、环形缓冲
+       uint8_t c[1] = {(uint8_t)ch};
+       if (USARTx_DEBUG == USART1)    vUSART1_SendData(c, 1);
+       if (USARTx_DEBUG == USART2)    vUSART2_SendData(c, 1);
+       if (USARTx_DEBUG == USART3)    vUSART3_SendData(c, 1);
+       if (USARTx_DEBUG == UART4)     vUART4_SendData(c, 1);
+       if (USARTx_DEBUG == UART5)     vUART5_SendData(c, 1);
+       return ch;
+   #endif
+   }
+   int _write(int file, char *ptr, int len) {
+       int DataIdx;
+       for (DataIdx = 0; DataIdx < len; DataIdx++) { __io_putchar(*ptr++); }
+       return len;
+   }
+   ```
+
+   2. nop指令替换
+
+       `__nop();` => `__asm("nop");`
+
