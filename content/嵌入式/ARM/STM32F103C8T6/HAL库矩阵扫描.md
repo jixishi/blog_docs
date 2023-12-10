@@ -13,7 +13,11 @@
 ```c
 #ifndef HAL_KEY_H
 #define HAL_KEY_H
+//长按次数计数
+#define KEY_LONGCNT 50
+
 //IO定义区 Hx上拉 Lx推挽
+//可增减 H和L的数量组成不同的矩阵扫描
 #define H1 HAL_GPIO_ReadPin(H1_GPIO_Port,H1_Pin)
 #define H2 HAL_GPIO_ReadPin(H2_GPIO_Port,H2_Pin)
 #define H3 HAL_GPIO_ReadPin(H3_GPIO_Port,H3_Pin)
@@ -28,7 +32,8 @@
 #define L4_L HAL_GPIO_WritePin(L4_GPIO_Port,L4_Pin,GPIO_PIN_RESET)
 //////////////////////////////////////////
 extern uint8_t Key_Flag;
-extern void Key_Treat(void);
+extern uint8_t Key_Long_F;
+extern uint8_t Key_Treat(void);
 #endif //HAL_KEY_H
 
 ```
@@ -173,6 +178,15 @@ void Key_Treat(void)
         }
     }
     RSet_Key_L();
+    if(Key_Value==Key_Flag&&Key_Value!=0){
+        Key_Long_Cnt++;
+    }else{
+        Key_Long_Cnt=0;
+    }
+    if(Key_Long_Cnt>=KEY_LONGCNT){Key_Long_F=1;}
+    else {Key_Long_F=0;}
+    Key_Flag=Key_Value;
+    return Key_Value;
 }
 
 ```
