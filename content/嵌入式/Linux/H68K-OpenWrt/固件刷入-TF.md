@@ -1,4 +1,4 @@
-```
+```json
 {
     "date":"2023.02.05 00:46",
     "tags": ["OpenWrt","Linux","H68K","TF"],
