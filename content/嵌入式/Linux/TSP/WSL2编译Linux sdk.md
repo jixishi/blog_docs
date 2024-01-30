@@ -156,19 +156,19 @@
 
    分布操作如下
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=YzhkOGE1MzI4MjhlZDQ3YzA1ZjBjYjIzMTZkZjYyMTJfR0xWTFIyYVNST1BVS29ZTE5lSkpETlA5MVQ0aGRmQmdfVG9rZW46RGs3YmJNVEcyb1o2T0d4UzZ1S2NNcFlibnNjXzE3MDY2MjU2NTM6MTcwNjYyOTI1M19WNA)
+   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MWM5NmY3ZTk3MjY3Njc3NGJiZGI1MTBiM2NjYmZhZmNfUHp3V1RRSGhwME5MM3RWcXFZWG83SEtodm8zZXBkVHpfVG9rZW46RGs3YmJNVEcyb1o2T0d4UzZ1S2NNcFlibnNjXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=ZWI4MjJlODM1NWEyZDdjMGViMWQ4ZTFhMWMxZjMwNTBfSXY0Z2VWR3BXQldESm5xU1Z3NjBkREIwSWcwb0Y5N3dfVG9rZW46WmZ2TGJOVDZXb0k1RE14SGtpU2NzRFpObktoXzE3MDY2MjU2NTM6MTcwNjYyOTI1M19WNA)
+   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=NGQyYzdiNmY4ZjU5YTUwODRlZDg5NGZjMjJiOTY5MDdfUXNZdlZPcmFYeGt0OGQzQVpHRVFCVXI2alhyWlhTek5fVG9rZW46WmZ2TGJOVDZXb0k1RE14SGtpU2NzRFpObktoXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=Yzg3YTIyNDk5ODJmZjFjMWJkN2U3N2U4OWFhOWNlNTBfZEVJbVZiZTdvYmhOVm1KbEJoNlNrOXBLbWEyUW9qeHNfVG9rZW46WUQ2dGJoc2JGbzBQVHZ4N2tZcWNrSFZsbmpiXzE3MDY2MjU2NTM6MTcwNjYyOTI1M19WNA)
+   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MzkwNjYzZGU0YWI3M2YzNTZhNDM0NjJiMjI0OGY5NDJfbFliNGpwbEJ0dWhlNXFEYTNtclNvWFFhQTB3R1JDcmJfVG9rZW46WUQ2dGJoc2JGbzBQVHZ4N2tZcWNrSFZsbmpiXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=Mjg5MmQ5OGQ5NTBmYmRiMTE5YTBjZjI1ZDIyOWY0NDBfVnkyZW9rNXVCR0VTU1RHU3AxZjBHRWtmVk5TZDM1dnFfVG9rZW46SnFtUmJoY3hOb0JrTGl4ZTZTbWNaMjI3blhiXzE3MDY2MjU2NTM6MTcwNjYyOTI1M19WNA)
+   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=YTc4OTg1ZGZmZGZjNjVkMDAwMjI2ZDEyNzMzNDQ4MzVfRHNWOWRHaFRWdnJ0eXBFT0pjdjhBMnlJcG9UVmpGbDRfVG9rZW46SnFtUmJoY3hOb0JrTGl4ZTZTbWNaMjI3blhiXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=YzQ0YTI5NmVkMjkyZDllMzg1MDRlYzI5MDAyOGNiNzRfb1FWRER3QnNyVWR4d0NnZDRESUFyUW1nTURIUnJrV29fVG9rZW46T1BiS2JUSXpxb2ZlbDd4T0V3RGNIQlBzbjNiXzE3MDY2MjU2NTM6MTcwNjYyOTI1M19WNA)
+   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MTVjOGM1NGUxYzNlODVkZmU1ZWVmMjAwN2UyMjU2MzJfdXVlQWNROHlQOGJMcTlKNDVIZW5aWkdjNkRXTTVIQUxfVG9rZW46T1BiS2JUSXpxb2ZlbDd4T0V3RGNIQlBzbjNiXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MTFjNzQxZjcyNDkwMjBjZDBlMmMxN2U1NGQ5MTMyMzlfVnNjRFM4Vm5XZlVRdGZSNEl4RjRvZ2xPcGUzb1hCOWxfVG9rZW46RW9McmIxdE1sb01ZSmh4T1VMV2M4bXlpbkZnXzE3MDY2MjU2NTM6MTcwNjYyOTI1M19WNA)
+   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDQxZWUzZDdlOTE1NDg3M2Q1NjE4ZDUyYjQ4YTlhMWNfUE14VXpVTHdBQVB1bXFuQ0syRWpkbjcwSk5kUWxnZ3NfVG9rZW46RW9McmIxdE1sb01ZSmh4T1VMV2M4bXlpbkZnXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=NGE3M2EyNjI2YWY3MGUxMzlkOWJhODM0MzNjZjUxYzdfOEV1TTBGbmNFcEFWd1ZlQ2tBaWNscVM2bTRCdHN5RHRfVG9rZW46TndoTGJ0UHJrb2pveWR4WW5iaWNybFcwbm5kXzE3MDY2MjU2NTM6MTcwNjYyOTI1M19WNA)
+   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MjE0NjM5NzI1NTI0ZDU4YzJmNTQzNmIxZjEwMzc3NmNfb0d5NmRBa3pKY2NSR1pNbDNBcFJhaWlSNnhMZHdZYW5fVG9rZW46TndoTGJ0UHJrb2pveWR4WW5iaWNybFcwbm5kXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
 
 3. 编译成功结果大约1.75小时(105min)使用5600u 16g
 
