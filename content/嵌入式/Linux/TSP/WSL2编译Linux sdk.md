@@ -277,5 +277,5 @@ rm -rf /buildroot/output/rockchip_rk3566/build/qlayer-1.0
 
 [泰山派官方文档]([【Linux】系统SDK编译 - 飞书云文档 (feishu.cn)](https://lceda001.feishu.cn/wiki/Da5owUV4dipiqUkZycbcxckinvc))
 
-[Article - JiXieShi's Blog (buildroot)](https://www.starss.cc/article?key=UVR0qi)
+[Article - JiXieShi's Blog (debian和Ubuntu)](https://www.starss.cc/article?key=UVR0qi)
 
