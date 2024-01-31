@@ -1,9 +1,9 @@
 ```json
 {
-    "date":"2024.01.31 17:15",
-    "tags": ["BLOG","TSP","Linux","SDK","buildrootd"],
+    "date":"2024.01.31 22:11",
+    "tags": ["BLOG","TSP","Linux","SDK","debian","Ubuntu"],
     "title": "基于WSL2搭建Linux的SDK环境并编译测试",
-    "description": "基于WSL2搭建Linux的SDK环境并编译测试buildroot的全编译和独立编译",
+    "description": "基于WSL2搭建Linux的SDK环境并编译测试debian的全编译和Ubuntu的文件系统制作",
     "author": "JiXieShi",
     "musicId":"5381722575"
 }
@@ -132,15 +132,24 @@
 
 成功生效如图
 
-### 编译buildroot
+### 编译debian
 
 1. 选择buildrot作为操作系统
 
    ```shell
-   export RK_ROOTFS_SYSTEM=buildroot
+   export RK_ROOTFS_SYSTEM=debian
    ```
 
-2. 运行全量编译命令
+2. 依赖补全
+
+   ```shell
+   cd debian && dpkg -i ubuntu-build-service/packages/* 
+   apt-get install -f -y && cd ..
+   ```
+
+   ![image-20240131205905524](https://s2.loli.net/2024/01/31/FQrN1pwO7PmaHMg.png)
+
+3. 运行全量编译命令
 
    ```shell
    ./build.sh all         # 只编译模块代码（u-Boot，kernel，Rootfs，Recovery）
@@ -170,11 +179,11 @@
 
    ![image-20240131170352824](https://s2.loli.net/2024/01/31/LUG498jnVbWR16Y.png)
 
-3. 编译成功结果大约1.75小时(105min)使用5600u 16g
+4. 编译成功 20.54 21.33结果大约**0.65**小时(**39**min)使用5600u 16g
 
-   ![image-20240131004637816](https://s2.loli.net/2024/01/31/CLAPsIbtxYa5gJn.png)
+   ![image-20240131213402233](https://s2.loli.net/2024/01/31/PKm6ICw4hqgoucn.png)
 
-4. 固件打包
+5. 固件打包
 
    ```shell
    ./mkfirmware.sh
@@ -182,94 +191,208 @@
 
    成功后输出路径为rockdev
 
-   ![image-20240131004911396](https://s2.loli.net/2024/01/31/2nTfzFmuae9XMrK.png)
+   ![image-20240131213723902](https://s2.loli.net/2024/01/31/1KRPBVwrfTFJGmX.png)
 
-5. 查看输出并下载
+6. 查看输出并下载
 
    ![image-20240131005055875](https://s2.loli.net/2024/01/31/ku3BIO2GWtxgC47.png)
 
-   将文件从wsl中复制到任意位置并使用开发工具进行烧录
+   将文件从wsl中复制到任意位置并使用开发工具进行烧录，配置文件获取[下载地址](https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/all/Z9AXbkTwDoMJzhxMXDtcZbbrncb/?mount_node_token=XVCQdtbIfo9FRYxZHpdcrFYnnkf&mount_point=docx_file)后修改为对应的路径
 
    ![image-20240131010334771](https://s2.loli.net/2024/01/31/HuQSpJTmC3XPqoU.png)
 
-## 独立编译
+## Ubuntu根文件系统制作
 
-### U-Boot编译
+#### 修改根文件系统
 
-```sh
-# U-Boot编译命令
-./build.sh uboot
-# 查看U-Boot详细编译命令
-./build.sh -h uboot
-```
+1. 创建一个普通用户相关命令如下
 
-成功结果
+   ```shell
+   adduser username
+   usermod -aG sudo username
+   ```
 
-![image-20240131010522653](https://s2.loli.net/2024/01/31/sfnpi3oh6FBJQTx.png)
+2. 切换至普通用户并下载基础文件系统
 
-### kernel编译
+   ```shell
+   su username && cd
+   wget https://cdimage.ubuntu.com/ubuntu-base/releases/18.04/release/ubuntu-base-18.04.5-base-arm64.tar.gz
+   ```
 
-```sh
-# Kernel编译命令
-./build.sh kernel
-# 查看Kernel详细编译命令
-./build.sh -h kernel
-```
+3. 创建temp目录并解压基础文件系统
 
-成功结果
+   ```shell
+   mkdir temp
+   tar -xpf ubuntu-base-18.04.5-base-arm64.tar.gz -C temp/
+   ```
 
-![image-20240131010642188](https://s2.loli.net/2024/01/31/bdE3W25VUnuzvN7.png)
+4. 安装qemu相关依赖并准备arm-ubuntu文件系统的网络和qemu
 
-### Recovery编译
+   ```shell
+   sudo apt-get install qemu-user-static
+   cp -b /etc/resolv.conf temp/etc/resolv.conf
+   cp /usr/bin/qemu-aarch64-static temp/usr/bin/
+   ```
 
-```sh
-# Recovery编译命令
-./build.sh recovery
-#查看Recovery详细编译命令
-./build.sh -h recovery
-```
+5. 创建切换脚本相关命令如下
 
-成功结果
+   ```shell
+   cat >> ~/rootfs-mount.sh <<EOF
+   #!/bin/bash
+   function mnt() {
+       echo "MOUNTING"
+       sudo update-binfmts --enable qemu-arm
+   
+       sudo mount -t proc /proc ${2}/proc
+       sudo mount -t sysfs /sys ${2}/sys
+       sudo mount -o bind /dev ${2}/dev
+   
+       sudo chroot ${2}
+   }
+   function umnt() {
+       echo "UNMOUNTING"
+   
+       sudo umount ${2}/proc
+       sudo umount ${2}/sys
+       sudo umount ${2}/dev
+   
+       sudo update-binfmts --disable qemu-arm
+   }
+   if [ "$1" == "-m" ] && [ -n "$2" ] ;
+   then
+       mnt $1 $2
+   elif [ "$1" == "-u" ] && [ -n "$2" ];
+   then
+       umnt $1 $2
+   else
+       echo ""
+       echo "Either 1'st, 2'nd or both parameters were missing"
+       echo ""
+       echo "1'st parameter can be one of these: -m(mount) OR -u(umount)"
+       echo "2'nd parameter is the full path of rootfs directory(with trailing '/')"
+       echo ""
+       echo "For example: ch-mount -m /media/sdcard/"
+       echo ""
+       echo 1st parameter : ${1}
+       echo 2nd parameter : ${2}
+   fi
+   EOF
+   ```
 
-![image-20240131010803517](https://s2.loli.net/2024/01/31/Ea2xTCVZ3w1Gv5P.png)
+6. 将执行权限赋予切换脚本，并进行文件系统切换
 
-### buildroot编译
+   ```shell
+   sudo chmod +x rootfs-mount.sh
+   sudo bash rootfs-mount.sh -m temp
+   ```
 
-#### Rootfs编译
+   结果如图
+
+   ![image-20240131202446772](https://s2.loli.net/2024/01/31/biOoUtHmsqLgW6G.png)
+
+7. 更新源
+
+   ```shell
+   apt-get update && apt upgrade
+   ```
+
+   结果如下
+
+   ![image-20240131202652231](https://s2.loli.net/2024/01/31/w6c3nG4JRlSKsMP.png)
+
+8. 安装基本依赖包
+
+   ```shell
+   apt install -y vim git ssh curl ethtool rsyslog bash-completion htop net-tools wireless-tools network-manager iputils-ping language-pack-en-base ifupdown
+   apt install -y inetutils-ping cutecom audacity v4l-utils cheese wpasupplicant
+   ```
+
+9. (可选)安装图像桌面
+
+   ```shell
+   apt-get install xubuntu-desktop
+   ```
+
+#### 配置网络
+
+
 
 ```shell
-./build.sh rootfs
+vim /etc/network/interfaces
+
+source-directory /etc/network/interfaces.d
+#以太网
+auto eth0
+iface eth0 inet dhcp
+#wifi
+auto wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa_config.conf
 ```
-
-成功结果![image-20240131170838701](https://s2.loli.net/2024/01/31/urdoS2ZPqDG1tmi.png)
-
-### 模块编译
-
-⽐如 qplayer 模块，常⽤相关编译命令如下：
-
-- 编译 qplayer
 
 ```shell
-make qplayer
+vim /etc/resolv.conf
+
+nameserver 8.8.8.8
+nameserver 114.114.114.114
 ```
 
-- 重编 qplayer
+#### 添加用户并配置密码
+
+添加用户：
 
 ```shell
-make qplayer-rebuild
+useradd -s '/bin/bash' -m -G adm,sudo username
 ```
 
-- 删除 qplayer
+给用户设置密码：
 
 ```shell
-make qplayer-dirclean
-# or
-rm -rf /buildroot/output/rockchip_rk3566/build/qlayer-1.0
+passwd username
 ```
 
-## Buildroot编译测试结束
+给root用户设置密码：
 
-查看sdk占用如下
+```shell
+passwd root
+```
 
-![image-20240131171219192](https://s2.loli.net/2024/01/31/VQDvJcOqehsrUFC.png)
+自定义完根文件系统就可以退出了。
 
+```shell
+exit
+sudo bash rootfs-mount.sh -u temp
+```
+
+#### 制作根文件系统
+
+1. 查看体积
+
+   ```shell
+   sudo du -h --max-depth=1
+   ```
+
+   ![image-20240131220220024](https://s2.loli.net/2024/01/31/4sXUClb5pjr3AHm.png)
+
+2. 制作自己的根文件系统，大小依据自己的根文件系统而定，注意依据 `temp` 文件夹的大小来修改 `count` 值，因为我们这里的大小为1015M所以count=2000*bs=1M保证大于我们的temp。
+
+   ```shell
+   mkdir  rootfs
+   dd if=/dev/zero of=linuxroot.img bs=1M count=2000
+   mkfs.ext4 linuxroot.img
+   sudo mount linuxroot.img rootfs/
+   sudo cp -rfp temp/*  rootfs/
+   sudo umount rootfs/
+   e2fsck -p -f linuxroot.img
+   resize2fs  -M linuxroot.img
+   ```
+
+   ![image-20240131220516621](https://s2.loli.net/2024/01/31/X8JEteHbrlfokFu.png)
+
+3. 这样 `linuxroot.img` 就是最终的根文件系统映像文件,将其移出至任意磁盘以便下载。
+
+#### 下载
+
+参考前文使用开发工具下载将文件从wsl中复制到任意位置并使用开发工具进行烧录，配置文件获取[下载地址](https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/all/Z9AXbkTwDoMJzhxMXDtcZbbrncb/?mount_node_token=XVCQdtbIfo9FRYxZHpdcrFYnnkf&mount_point=docx_file)后修改为对应的路径
+
+![image-20240131010334771](https://s2.loli.net/2024/01/31/HuQSpJTmC3XPqoU.png)
