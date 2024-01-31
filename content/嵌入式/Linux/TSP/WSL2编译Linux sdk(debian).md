@@ -2,7 +2,7 @@
 {
     "date":"2024.01.31 22:11",
     "tags": ["BLOG","TSP","Linux","SDK","debian","Ubuntu"],
-    "title": "基于WSL2搭建Linux的SDK环境并编译测试",
+    "title": "基于WSL2搭建Linux的SDK环境并编译测试(Debian和Ubuntu)",
     "description": "基于WSL2搭建Linux的SDK环境并编译测试debian的全编译和Ubuntu的文件系统制作",
     "author": "JiXieShi",
     "musicId":"5381722575"

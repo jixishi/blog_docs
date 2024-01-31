@@ -2,7 +2,7 @@
 {
     "date":"2024.01.31 17:15",
     "tags": ["BLOG","TSP","Linux","SDK","buildrootd"],
-    "title": "基于WSL2搭建Linux的SDK环境并编译测试",
+    "title": "基于WSL2搭建Linux的SDK环境并编译测试(buildroot)",
     "description": "基于WSL2搭建Linux的SDK环境并编译测试buildroot的全编译和独立编译",
     "author": "JiXieShi",
     "musicId":"5381722575"
