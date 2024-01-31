@@ -1,6 +1,6 @@
 ```json
 {
-    "date":"2024.01.31 01:18",
+    "date":"2024.01.31 17:15",
     "tags": ["BLOG","TSP","Linux","SDK","buildrootd"],
     "title": "基于WSL2搭建Linux的SDK环境并编译测试",
     "description": "基于WSL2搭建Linux的SDK环境并编译测试buildroot的全编译和独立编译",
@@ -156,19 +156,19 @@
 
    分布操作如下
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MWM5NmY3ZTk3MjY3Njc3NGJiZGI1MTBiM2NjYmZhZmNfUHp3V1RRSGhwME5MM3RWcXFZWG83SEtodm8zZXBkVHpfVG9rZW46RGs3YmJNVEcyb1o2T0d4UzZ1S2NNcFlibnNjXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
+   ![image-20240131170241405](https://s2.loli.net/2024/01/31/MdlASobK4fD8mIX.png)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=NGQyYzdiNmY4ZjU5YTUwODRlZDg5NGZjMjJiOTY5MDdfUXNZdlZPcmFYeGt0OGQzQVpHRVFCVXI2alhyWlhTek5fVG9rZW46WmZ2TGJOVDZXb0k1RE14SGtpU2NzRFpObktoXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
+   ![image-20240131170301614](https://s2.loli.net/2024/01/31/a9FzAreyD2uVCQ7.png)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MzkwNjYzZGU0YWI3M2YzNTZhNDM0NjJiMjI0OGY5NDJfbFliNGpwbEJ0dWhlNXFEYTNtclNvWFFhQTB3R1JDcmJfVG9rZW46WUQ2dGJoc2JGbzBQVHZ4N2tZcWNrSFZsbmpiXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
+   ![image-20240131170308275](https://s2.loli.net/2024/01/31/tNTCHSxIh26pPr1.png)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=YTc4OTg1ZGZmZGZjNjVkMDAwMjI2ZDEyNzMzNDQ4MzVfRHNWOWRHaFRWdnJ0eXBFT0pjdjhBMnlJcG9UVmpGbDRfVG9rZW46SnFtUmJoY3hOb0JrTGl4ZTZTbWNaMjI3blhiXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
+   ![image-20240131170317464](https://s2.loli.net/2024/01/31/c9l7QeN6D5qhBvo.png)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MTVjOGM1NGUxYzNlODVkZmU1ZWVmMjAwN2UyMjU2MzJfdXVlQWNROHlQOGJMcTlKNDVIZW5aWkdjNkRXTTVIQUxfVG9rZW46T1BiS2JUSXpxb2ZlbDd4T0V3RGNIQlBzbjNiXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
+   ![image-20240131170333017](https://s2.loli.net/2024/01/31/jdNrl3sE8H6eDum.png)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=ZDQxZWUzZDdlOTE1NDg3M2Q1NjE4ZDUyYjQ4YTlhMWNfUE14VXpVTHdBQVB1bXFuQ0syRWpkbjcwSk5kUWxnZ3NfVG9rZW46RW9McmIxdE1sb01ZSmh4T1VMV2M4bXlpbkZnXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
+   ![image-20240131170342262](https://s2.loli.net/2024/01/31/Txk1WXfLl96pbDs.png)
 
-   ![img](https://lceda001.feishu.cn/space/api/box/stream/download/asynccode/?code=MjE0NjM5NzI1NTI0ZDU4YzJmNTQzNmIxZjEwMzc3NmNfb0d5NmRBa3pKY2NSR1pNbDNBcFJhaWlSNnhMZHdZYW5fVG9rZW46TndoTGJ0UHJrb2pveWR4WW5iaWNybFcwbm5kXzE3MDY2MzgxMDM6MTcwNjY0MTcwM19WNA)
+   ![image-20240131170352824](https://s2.loli.net/2024/01/31/LUG498jnVbWR16Y.png)
 
 3. 编译成功结果大约1.75小时(105min)使用5600u 16g
 
@@ -232,3 +232,44 @@
 成功结果
 
 ![image-20240131010803517](https://s2.loli.net/2024/01/31/Ea2xTCVZ3w1Gv5P.png)
+
+### buildroot编译
+
+#### Rootfs编译
+
+```shell
+./build.sh rootfs
+```
+
+成功结果![image-20240131170838701](https://s2.loli.net/2024/01/31/urdoS2ZPqDG1tmi.png)
+
+### 模块编译
+
+⽐如 qplayer 模块，常⽤相关编译命令如下：
+
+- 编译 qplayer
+
+```shell
+make qplayer
+```
+
+- 重编 qplayer
+
+```shell
+make qplayer-rebuild
+```
+
+- 删除 qplayer
+
+```shell
+make qplayer-dirclean
+# or
+rm -rf /buildroot/output/rockchip_rk3566/build/qlayer-1.0
+```
+
+## Buildroot编译测试结束
+
+查看sdk占用如下
+
+![image-20240131171219192](https://s2.loli.net/2024/01/31/VQDvJcOqehsrUFC.png)
+
