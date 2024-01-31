@@ -396,3 +396,11 @@ sudo bash rootfs-mount.sh -u temp
 参考前文使用开发工具下载将文件从wsl中复制到任意位置并使用开发工具进行烧录，配置文件获取[下载地址](https://internal-api-drive-stream.feishu.cn/space/api/box/stream/download/all/Z9AXbkTwDoMJzhxMXDtcZbbrncb/?mount_node_token=XVCQdtbIfo9FRYxZHpdcrFYnnkf&mount_point=docx_file)后修改为对应的路径
 
 ![image-20240131010334771](https://s2.loli.net/2024/01/31/HuQSpJTmC3XPqoU.png)
+
+## 参考资料
+
+[泰山派官方文档]([【Linux】系统SDK编译 - 飞书云文档 (feishu.cn)](https://lceda001.feishu.cn/wiki/Da5owUV4dipiqUkZycbcxckinvc))
+
+[Article - JiXieShi's Blog (buildroot)](https://www.starss.cc/article?key=7qZIm8)
+
+[itx-3588j-ubuntu文件系统编译问题 - Core-3588J - Firefly开源社区itx-3588j-ubuntu文件系统编译问题 (t-firefly.com)](https://dev.t-firefly.com/thread-120624-1-1.html)
