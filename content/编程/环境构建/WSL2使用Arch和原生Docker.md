@@ -76,13 +76,13 @@
 
 2. 安装zinit并配置zsh
 
-   1. 安装
+   - 安装
 
       ```shell
       bash -c "$(curl -fsSL https://git.io/zinit-install)"  # https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh
       ```
 
-   2. 配置zsh
+   - 配置zsh
 
       ```shell
       cat >> ~/.zshrc <<EOF
@@ -119,17 +119,38 @@
       EOF
       ```
 
-   3. 切换默认终端为zsh
+3. 切换默认终端为zsh
 
-      ```shell
-      cat /etc/shells
-      # 找到zsh的行复制到下面
-      chsh -s /usr/bin/zsh
-      ```
+   ```shell
+   cat /etc/shells
+   # 找到zsh的行复制到下面
+   chsh -s /usr/bin/zsh
+   ```
 
-   4. 效果如下
+4. 效果如下
 
-      ![image-20240521161230973](https://s2.loli.net/2024/05/21/UGnLQIBfhDsVzgp.png)
+   ![image-20240521161230973](https://s2.loli.net/2024/05/21/UGnLQIBfhDsVzgp.png)
+
+5. 加入archlinuxcn源
+
+   ```shell
+   sudo cat << EOF > /etc/pacman.conf
+   [archlinuxcn]
+   Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch
+   EOF
+   sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+   sudo pacman -Sy archlinuxcn-keyring
+   ```
+
+6. 安装yay
+
+   ```shell
+   git clone https://aur.archlinux.org/yay
+   cd yay
+   GOPROXY=https://goproxy.cn 
+   makepkg -si
+   cd ..&&rm -rf yay
+   ```
 
 ### Docker配置
 
