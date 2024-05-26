@@ -71,7 +71,7 @@
 
    ```shell
    sudo pacman -Syu
-   sudo pacman -Sy zsh git wget curl vim
+   sudo pacman -Sy zsh git wget curl vim exa lua unzip
    ```
 
 2. 安装zinit并配置zsh
@@ -93,7 +93,25 @@
       # powerlevel10k主题
       zinit ice depth"1" # git clone depth
       zinit light romkatv/powerlevel10k
+      # 快速目录跳转
+      zinit ice lucid wait='1'
+      zinit light skywind3000/z.lua
+      # fzf
+      zinit ice from"gh-r" as"program"
+      zinit load junegunn/fzf
+      # sharkdp/bat
+      zinit ice as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+      zinit light sharkdp/bat
+      # 加载补全
+      zinit ice mv="*.zsh -> _fzf" as="completion"
+      zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/completion.zsh'
+      zinit snippet 'https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh'
+      zinit ice as="completion"
+      zinit snippet 'https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/fd/_fd'
+      zinit ice as="completion"
+      zinit snippet 'https://github.com/ogham/exa/tree/master/completions/zsh/_exa'
       # OMZ基本模块
+      zinit ice lucid wait='1'
       zinit snippet OMZ::lib/git.zsh
       zinit snippet OMZ::lib/history.zsh
       zinit snippet OMZ::lib/key-bindings.zsh
@@ -107,15 +125,15 @@
       PROXY_IP="192.168.31.14" #(按需修改
       PROXY_PORT="10808"
       # 快捷命令
-      alias spi="export https_proxy=http://$PROXY_IP:$PROXY_PORT && export http_proxy=http://$PROXY_IP:$PROXY_PORT"
+      alias spi="export https_proxy=http://: && export http_proxy=http://:"
       alias upi="unset http_proxy && unset https_proxy"
-      alias cpi='echo $http_proxy "<->" $https_proxy'
+      alias cpi='echo http://127.0.0.1:7897 "<->" http://127.0.0.1:7897'
       alias edzsh="vim ~/.zshrc"
       alias upzsh="exec zsh"
       alias edvim="vim ~/.vimrc"
       alias cls="clear"
-      alias la="ls -a"
-      alias ll="ls -lh"
+      alias la="exa -abghHliS"
+      alias ll='exa -hlg -s=time -r'
       EOF
       ```
 
