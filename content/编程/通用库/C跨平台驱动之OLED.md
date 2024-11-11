@@ -10,6 +10,12 @@
 
 ## C/C++跨平台屏幕驱动之OLED
 
+### 库地址
+
+[机械师/HW_Lib](https://gitee.com/JiXieShi_STARSS/hw_-lib)
+
+[JiXieShi/HW_Lib: 自用嵌入式工具库 - HW_Lib - Starss-Git](https://gitea.starss.cc/JiXieShi/HW_Lib)
+
 ### 相关代码段
 
 1. 设备结构体
