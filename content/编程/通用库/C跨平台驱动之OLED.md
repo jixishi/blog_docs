@@ -12,9 +12,9 @@
 
 ### 库地址
 
-[机械师/HW_Lib](https://gitee.com/JiXieShi_STARSS/hw_-lib)
+- [机械师/HW_Lib](https://gitee.com/JiXieShi_STARSS/hw_-lib)
 
-[JiXieShi/HW_Lib: 自用嵌入式工具库 - HW_Lib - Starss-Git](https://gitea.starss.cc/JiXieShi/HW_Lib)
+- [JiXieShi/HW_Lib: 自用嵌入式工具库 - HW_Lib - Starss-Git](https://gitea.starss.cc/JiXieShi/HW_Lib)
 
 ### 相关代码段
 
