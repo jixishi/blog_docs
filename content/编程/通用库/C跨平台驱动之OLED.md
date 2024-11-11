@@ -234,175 +234,176 @@
       }
       ```
 
-    2. 界面文件
+   2. 界面文件
 
-       page.h
+      page.h
 
-       ```c
-       #ifndef HW_LIB_PAGE_H
-       #define HW_LIB_PAGE_H
-       
-       #include "oled.h"
-       
-       typedef void (*Page_t)(OLED_T *dev);
-       
-       extern uint8_t pageid, cur, cnt, item_h, item_w;
-       extern uint8_t cnt_f;
-       
-       typedef enum page_e{
-           MAIN_PAGE,
-           A_PAGE,
-           B_PAGE,
-           C_PAGE,
-           IMG_PAGE,
-           numbe_off_page,
-       };
-       
-       typedef struct Page_L {
-           uint8_t id: 4;
-           uint8_t curmax: 4;
-           uint8_t curmin: 4;
-           uint8_t back: 4;
-           uint8_t next: 4;
-           uint8_t item_h:6;
-           uint8_t item_w: 7;
-           Page_t page;
-       } Page_L_t;
-       
-       void pageinit();
-       
-       Page_L_t pagesearch(uint8_t id);
-       
-       void mainpage(OLED_T *dev);
-       
-       void pageA(OLED_T *dev);
-       
-       void pageB(OLED_T *dev);
-       
-       void pageC(OLED_T *dev);
-       void pageImg(OLED_T *dev);
-       
-       #endif //HW_LIB_PAGE_H
-       ```
+      ```c
+      #ifndef HW_LIB_PAGE_H
+      #define HW_LIB_PAGE_H
+      
+      #include "oled.h"
+      
+      typedef void (*Page_t)(OLED_T *dev);
+      
+      extern uint8_t pageid, cur, cnt, item_h, item_w;
+      extern uint8_t cnt_f;
+      
+      typedef enum page_e{
+          MAIN_PAGE,
+          A_PAGE,
+          B_PAGE,
+          C_PAGE,
+          IMG_PAGE,
+          numbe_off_page,
+      };
+      
+      typedef struct Page_L {
+          uint8_t id: 4;
+          uint8_t curmax: 4;
+          uint8_t curmin: 4;
+          uint8_t back: 4;
+          uint8_t next: 4;
+          uint8_t item_h:6;
+          uint8_t item_w: 7;
+          Page_t page;
+      } Page_L_t;
+      
+      void pageinit();
+      
+      Page_L_t pagesearch(uint8_t id);
+      
+      void mainpage(OLED_T *dev);
+      
+      void pageA(OLED_T *dev);
+      
+      void pageB(OLED_T *dev);
+      
+      void pageC(OLED_T *dev);
+      void pageImg(OLED_T *dev);
+      
+      #endif //HW_LIB_PAGE_H
+      ```
 
-       page.c
+      page.c
 
-       ```c
-       #include <stdio.h>
-       #include "page.h"
-       #include "list.h"
-       #include "bmp.h"
-       #include "stm32f1xx_hal.h"
-       
-       uint8_t pageid = 0, cur = 1, cnt = 0, item_h = 16, item_w = 0;
-       uint8_t cnt_f=1;
-       static List_t list;
-       Page_L_t mainp = {MAIN_PAGE, 0, 0, MAIN_PAGE, 1, 16, 16, mainpage};
-       Page_L_t ap = {A_PAGE, 2, 1, MAIN_PAGE, 1, 12, 36, pageA};
-       Page_L_t bp = {B_PAGE, 2, 1, MAIN_PAGE, 2, 12, 36, pageB};
-       Page_L_t cp = {C_PAGE, 2, 1, MAIN_PAGE, 3, 12, 36, pageC};
-       Page_L_t ip = {IMG_PAGE, 0, 0, MAIN_PAGE, 4, 0, 0, pageImg};
-       
-       
-       void pageinit() {
-           list_init(&list);
-           list_insert(&list, &mainp);
-           list_insert(&list, &ap);
-           list_insert(&list, &bp);
-           list_insert(&list, &cp);
-           list_insert(&list, &ip);
-       }
-       
-       int compare_page(const void *s1, const void *s2) {
-           Page_L_t *data1 = (Page_L_t *) s1;
-           uint8_t *data2 = (uint8_t *) s2;
-       
-           return (data1->id - *data2);
-       }
-       
-       Page_L_t pagesearch(uint8_t id) {
-           Page_L_t *ret;
-           ret = list_search(&list, &id, compare_page);
-           return *ret;
-       }
-       
-       void pagecur(OLED_T *dev) {
-           if (cnt % 2) {
-               if (pagesearch(pageid).curmin != pagesearch(pageid).curmax&&pagesearch(pageid).item_h != 0) {
-                   OLED_ShowString(dev, item_w - item_h, cur * item_h, ">", item_h);
-               }
-           }
-           if(cnt_f){
-               cnt++;
-           }
-       }
-       
-       void mainpage(OLED_T *dev) {
-           OLED_CLS(dev);
-           OLED_ShowCHString(dev, 32, 0 * item_h, "主界面");
-           OLED_ShowCHString(dev, 12, 1 * item_h, "信息显示");
-           if(cnt%2==0){
-               OLED_ShowCHString(dev, 12, 2 * item_h, "信息1");
-           } else{
-               OLED_ShowCHString(dev, 6, 2 * item_h, "信息2");
-           }
-           OLED_ShowCHString(dev, 12, 3 * item_h, "尾注");
-           pagecur(dev);
-       }
-       
-       void pageA(OLED_T *dev) {
-           OLED_CLS(dev);
-           OLED_ShowString(dev, 32, 0, " A  Page", 12);
-           OLED_ShowString(dev, 36, 12, "1.contx", 12);
-           OLED_ShowString(dev, 36, 24, "         back", 12);
-           pagecur(dev);
-       }
-       
-       void pageB(OLED_T *dev) {
-           OLED_CLS(dev);
-           OLED_ShowString(dev, 32, 0, " B  Page", 12);
-           OLED_ShowString(dev, 36, 12, "1.contx", 12);
-           OLED_ShowString(dev, 36, 24, "         back", 12);
-           pagecur(dev);
-       }
-       
-       void pageC(OLED_T *dev) {
-           OLED_CLS(dev);
-           OLED_ShowString(dev, 32, 0, " C  Page", 12);
-           OLED_ShowString(dev, 36, 12, "1.contx", 12);
-           OLED_ShowString(dev, 36, 24, "         back", 12);
-           pagecur(dev);
-       }
-       
-       void pageImg(OLED_T *dev) {
-           OLED_CLS(dev);
-           switch (cnt % 6) {
-               case 0:
-                   OLED_ShowPic(dev, 0, 0, 64, 64, BMP1);
-                   break;
-               case 1:
-                   OLED_ShowPic(dev, 0, 0, 64, 64, BMP2);
-                   break;
-               case 2:
-                   OLED_ShowPic(dev, 0, 0, 64, 64, BMP3);
-                   break;
-               case 3:
-                   OLED_ShowPic(dev, 0, 0, 64, 64, BMP4);
-                   break;
-               case 4:
-                   OLED_ShowPic(dev, 0, 0, 64, 64, BMP5);
-                   break;
-               case 5:
-                   OLED_ShowPic(dev, 0, 0, 64, 64, BMP6);
-                   break;
-               default:
-                   break;
-           }
-           pagecur(dev);
-       }
-       ```
+      ```c
+      #include <stdio.h>
+      #include "page.h"
+      #include "list.h"
+      #include "bmp.h"
+      #include "stm32f1xx_hal.h"
+      
+      uint8_t pageid = 0, cur = 1, cnt = 0, item_h = 16, item_w = 0;
+      uint8_t cnt_f=1;
+      static List_t list;
+      Page_L_t mainp = {MAIN_PAGE, 0, 0, MAIN_PAGE, 1, 16, 16, mainpage};
+      Page_L_t ap = {A_PAGE, 2, 1, MAIN_PAGE, 1, 12, 36, pageA};
+      Page_L_t bp = {B_PAGE, 2, 1, MAIN_PAGE, 2, 12, 36, pageB};
+      Page_L_t cp = {C_PAGE, 2, 1, MAIN_PAGE, 3, 12, 36, pageC};
+      Page_L_t ip = {IMG_PAGE, 0, 0, MAIN_PAGE, 4, 0, 0, pageImg};
+      
+      
+      void pageinit() {
+          list_init(&list);
+          list_insert(&list, &mainp);
+          list_insert(&list, &ap);
+          list_insert(&list, &bp);
+          list_insert(&list, &cp);
+          list_insert(&list, &ip);
+      }
+      
+      int compare_page(const void *s1, const void *s2) {
+          Page_L_t *data1 = (Page_L_t *) s1;
+          uint8_t *data2 = (uint8_t *) s2;
+      
+          return (data1->id - *data2);
+      }
+      
+      Page_L_t pagesearch(uint8_t id) {
+          Page_L_t *ret;
+          ret = list_search(&list, &id, compare_page);
+          return *ret;
+      }
+      
+      void pagecur(OLED_T *dev) {
+          if (cnt % 2) {
+              if (pagesearch(pageid).curmin != pagesearch(pageid).curmax&&pagesearch(pageid).item_h != 0) {
+                  OLED_ShowString(dev, item_w - item_h, cur * item_h, ">", item_h);
+              }
+          }
+          if(cnt_f){
+              cnt++;
+          }
+      }
+      
+      void mainpage(OLED_T *dev) {
+          OLED_CLS(dev);
+          OLED_ShowCHString(dev, 32, 0 * item_h, "主界面");
+          OLED_ShowCHString(dev, 12, 1 * item_h, "信息显示");
+          if(cnt%2==0){
+              OLED_ShowCHString(dev, 12, 2 * item_h, "信息1");
+          } else{
+              OLED_ShowCHString(dev, 6, 2 * item_h, "信息2");
+          }
+          OLED_ShowCHString(dev, 12, 3 * item_h, "尾注");
+          pagecur(dev);
+      }
+      
+      void pageA(OLED_T *dev) {
+          OLED_CLS(dev);
+          OLED_ShowString(dev, 32, 0, " A  Page", 12);
+          OLED_ShowString(dev, 36, 12, "1.contx", 12);
+          OLED_ShowString(dev, 36, 24, "         back", 12);
+          pagecur(dev);
+      }
+      
+      void pageB(OLED_T *dev) {
+          OLED_CLS(dev);
+          OLED_ShowString(dev, 32, 0, " B  Page", 12);
+          OLED_ShowString(dev, 36, 12, "1.contx", 12);
+          OLED_ShowString(dev, 36, 24, "         back", 12);
+          pagecur(dev);
+      }
+      
+      void pageC(OLED_T *dev) {
+          OLED_CLS(dev);
+          OLED_ShowString(dev, 32, 0, " C  Page", 12);
+          OLED_ShowString(dev, 36, 12, "1.contx", 12);
+          OLED_ShowString(dev, 36, 24, "         back", 12);
+          pagecur(dev);
+      }
+      
+      void pageImg(OLED_T *dev) {
+          OLED_CLS(dev);
+          switch (cnt % 6) {
+              case 0:
+                  OLED_ShowPic(dev, 0, 0, 64, 64, BMP1);
+                  break;
+              case 1:
+                  OLED_ShowPic(dev, 0, 0, 64, 64, BMP2);
+                  break;
+              case 2:
+                  OLED_ShowPic(dev, 0, 0, 64, 64, BMP3);
+                  break;
+              case 3:
+                  OLED_ShowPic(dev, 0, 0, 64, 64, BMP4);
+                  break;
+              case 4:
+                  OLED_ShowPic(dev, 0, 0, 64, 64, BMP5);
+                  break;
+              case 5:
+                  OLED_ShowPic(dev, 0, 0, 64, 64, BMP6);
+                  break;
+              default:
+                  break;
+          }
+          pagecur(dev);
+      }
+      ```
 
-效果如下
 
-![image-20241111135412516](https://s2.loli.net/2024/11/11/qR1E7Bb9jVXlHdP.png)
+​		效果如下
+
+​					![image-20241111135412516](https://s2.loli.net/2024/11/11/qR1E7Bb9jVXlHdP.png)
 
