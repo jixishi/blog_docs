@@ -398,9 +398,8 @@
           pagecur(dev);
       }
       ```
-
-
-​		效果如下
-
-​					![image-20241111135412516](https://s2.loli.net/2024/11/11/qR1E7Bb9jVXlHdP.png)
+      
+      效果如下
+      
+      ![image-20241111135412516](https://s2.loli.net/2024/11/11/qR1E7Bb9jVXlHdP.png)
 
