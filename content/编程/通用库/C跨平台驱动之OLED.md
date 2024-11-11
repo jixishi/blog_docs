@@ -159,7 +159,7 @@
 
    效果如下
 
-   <img src="https://s2.loli.net/2024/11/11/oWMdQXs4xIwt3ph.jpg" alt="47c6d57ec36534ee375d3b55666e491f" style="zoom:80%;" />
+   ![image-20241111143100333](https://s2.loli.net/2024/11/11/Ux1HmfLpTMZD8j5.png)
 
 3. STM32使用
 
