@@ -301,7 +301,6 @@
       Page_L_t cp = {C_PAGE, 2, 1, MAIN_PAGE, 3, 12, 36, pageC};
       Page_L_t ip = {IMG_PAGE, 0, 0, MAIN_PAGE, 4, 0, 0, pageImg};
       
-      
       void pageinit() {
           list_init(&list);
           list_insert(&list, &mainp);
