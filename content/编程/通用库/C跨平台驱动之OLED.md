@@ -185,8 +185,6 @@
       // #include "spi.h"
       #include "i2c.h"
       #include "tool.h"
-      
-      
       OLED_T oled;
       uint8_t oledbuf[128][8];
       uint8_t Cmd(uint8_t *data, uint32_t l) {
@@ -233,7 +231,7 @@
           OLED_Init(&oled);
       }
       ```
-
+      
    2. 界面文件
 
       page.h
@@ -284,7 +282,7 @@
       
       #endif //HW_LIB_PAGE_H
       ```
-
+   
       page.c
 
       ```c
