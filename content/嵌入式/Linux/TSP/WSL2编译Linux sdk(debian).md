@@ -315,14 +315,13 @@
 
 #### 配置网络
 
-
-
 ```shell
 vim /etc/network/interfaces
 
 source-directory /etc/network/interfaces.d
 #以太网
 auto eth0
+allow-hotplug eth0
 iface eth0 inet dhcp
 #wifi
 auto wlan0
