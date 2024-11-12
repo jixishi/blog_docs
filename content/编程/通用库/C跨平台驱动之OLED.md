@@ -2,7 +2,7 @@
 {
     "date":"2024.9.10 10:06",
     "tags": ["BLOG","OLED","STM32","屏幕","驱动"],
-    "description": "C/C++跨平台通用屏幕驱动库",
+    "description": "C/C++跨平台通用OLED屏幕驱动库",
     "author": "JiXieShi",
     "musicId":"5381722575"
 }
